@@ -9,6 +9,8 @@
   <body>
     <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
 
+    <section></section>
+    
   </body>
 
 <script>
@@ -276,13 +278,102 @@ bind "this" to the new object, so you can refer to "this" in your constructor co
 run the code in the constructor
 return the new object
 
-
-
 */
 
+function Person(name) { // constructors start with a capital letter by convention. and are named for the type of object they
+    // create. this function is still creating an object even without something like "const obj = { }" as it did in line 238.
+    this.name = name; // the parameter it receives is assigned to the object's property called name
+    this.introduceSelf = function () { // a method showing a message in the console
+        console.log(`Hi, I'm ${this.name}.`);
+    };
+}; 
+
+/*
+compare the Person(name) with the below createPerson(name). they look very similar to each other except the constructor 
+has this.name and this.introduceSelf instead of obj.name etc. And the constructor doesn't have a line such as const obj = 
+{ } which creates an empty object before having a property and method added. Also the constructor doesn't have return obj.  
+then in line 310 for the const salva1 = new Person("Salva1"), the whole thing is put together. line 310 calls the function
+that is doing the object creation and adding the property and method. and returns the object.
+ 
+function createPerson(name) {  // these lines are non-constructor code. it is creating an object, then it adds a property 
+    // called name and gives it a value. then it adds a method. notice that these lines use obj.name and obj.introduceSelf instead
+    // of "this". whereas function Person(), the constructor, uses this.name and this.introduceSelf instead of obj.name etc.
+    const obj = {}; 
+    obj.name = name; 
+    obj.introduceSelf = function () { 
+        console.log(`Hi, I'm ${this.name}.`); 
+    };
+
+    return obj;
+};
+*/
+
+// to call Person() as a constructor, we use the "new" keyword
+const salva1 = new Person("Salva1"); // using the "new" keyword, this calls the Person() and uses Salva for the parameter. now
+// the object has been created.
+salva1.name; // you can comment this part out bc if you type salva1; in the console, it will show the new object with the name
+// property with Salva1 and the new method
+salva1.introduceSelf(); // this part you need bc it won't show the message until you type this
+
+const frankie1 = new Person("Frankie1"); // similar idea as above starting at line 310
+frankie1.name; 
+frankie1.introduceSelf();
 
 
+// TEST YOUR SKILLS
+// OBJECT 1
+const cat = {
+  name : 'Bertie',
+  breed : 'Cymric',
+  color : 'white',
+  greeting: function() {
+    console.log('Meow!');
+  }
+}
 
+// Put your code here
+
+const catName = cat["name"]; // store the value of the name property in var catName using bracket notation
+cat.greeting(); // run the greeting using dot notation
+cat.color = "black"; // change the color to black
+
+// Don't edit the code below here
+
+let para1 = document.createElement('p');
+let para2 = document.createElement('p'); 
+let section = document.querySelector('section');  // had to add this or else the p's won't show
+
+para1.textContent = `The cat's name is ${ catName }.`;
+para2.textContent = `The cat's color is ${ cat.color }.`;
+
+section.appendChild(para1);
+section.appendChild(para2);
+
+// OBJECT 2
+
+let bandInfo;
+
+// Put your code here
+
+const band = {
+    name: "ABBA",
+    nationality: "Sweden",
+    genre: ["Pop", "Disco"],
+    members: 4,
+    formed: 1972,
+    split: "false",
+    albums: ["name", "year"], // each array item is an object containing 2 members - name and year released
+    // https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
+    // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+
+};
+
+
+// Don't edit the code below here
+
+let bandPara1 = document.createElement('p');
+bandPara1.textContent = bandInfo;
+section.appendChild(bandPara1);
 
 </script>
 </html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+
+  </body>
+
+<script>
+// NOTES FROM https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics
+
+/*
+
+const person = { // new object
+    name: ["Bob", "Smith"], // first property, 2 values in an array
+    age: 32, // second property
+    bio: function () { // third property is a function. it shows name 0, name 1 and age
+            // remember if you want to use var's in a string with console.log you need `${ } ... `
+            // can rewrite bio: function () {... } to just bio() {console.log ... }
+            console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`);
+    },
+    introduceSelf: function () { // fourth property is a function. shows name 0
+    // can rewrite introduceSelf: function() {... } to just introduceSelf() {console.log ... }
+    console.log(`Hi, I"m ${this.name[0]}.`);
+    },
+};
+
+*/
+
+/*  
+in the console, you can type person.name; to see the array. type person.name[0]; to see Bob. type person.age; to see 32.
+person.bio(); to see Bob Smith is 32 years old. person.introduceSelf() to see Hi, I'm Bob. 
+
+the person object has name, age, bio and introduceSelf. name and age are data items and are referred to as object properties.
+
+bio and introduceSelf are functions that allow the object to do something with the data items. these functions are referred to
+as the object's methods. 
+
+the above lines 19 to 31 is referred to as an object literal bc we've written out all the object contents when we created it. 
+later on, there will be objects instantiated from classes which is different from an object literal.
+
+DOT NOTATION
+
+the object's name is person. person acts as the namespace. it must be entered first to access anything inside the object. 
+then you write a dot and the item you want to access. 
+
+person.age will get the age
+person.name[0] will get the first item of the array in the name
+person.bio() calls the bio() function aka method
+
+*/
+
+// OBJECTS AS OBJECT PROPERTIES
+
+// changing the name: ["Bob", "Smith"] to another object. so you will have a name object inside the person object. 
+// also will need to change the methods to show it is not an array name[0] but is now person.name.first
+
+/*
+
+const person = { // new object
+    name: { // the first property is a name object inside the person object
+        first: "Bob",
+        last: "Smith",
+    },
+    age: 32, // second property
+    bio() { // third property is a function. it shows name 0, name 1 and age
+        // remember if you want to use var's in a string with console.log you need `${ } ... `
+        // can rewrite bio: function () {... } to just bio() {console.log ... }
+        console.log(`${this.name.first} ${this.name.last} is ${this.age} years old.`);
+    },
+    introduceSelf() { // fourth property is a function. shows name 0
+        // can rewrite introduceSelf: function() {... } to just introduceSelf() {console.log ... }
+        console.log(`Hi, I"m ${this.name.first}.`);
+    },
+};
+
+*/
+    
+// name: {first: "Bob", last: "Smith"}, to access this property, you use person.name.first or person.name.last 
+
+/*
+BRACKET NOTATION
+
+person.name.first or person.age is dot notation. to use bracket notation for these it would be this: 
+
+person["name"]["first"]
+person["age"]
+
+notice bracket notation looks similar to accessing an array. instead of using name[0] or name[1] aka using the index number, 
+you use the name associated with each member's value. this is why objects are sometimes called associative arrays. they map 
+strings to values in the same way that an array maps index numbers to values.
+
+when an object property name is held in a variable, then you must use brackets to access the value. 
+*/
+
+const personBracket = { // new object
+    name: ["Bob", "Smith"], // first property is an array
+    age: 32, // second property
+};
+
+function logProperty(propertyName) { // new function. receives propertyName. remember propertyName is just a place holder aka 
+    // namespace from the above personBracket object, it can receive either name or age. in other words, the function names the 
+    // param as propertyName but what it is really receiving is name or age
+
+    console.log(personBracket[propertyName]); // will either print personBracket's name values or age value
+};
+
+// logProperty() function can use personBracket[propertyName] to retrieve the value of the property named in propertyName. 
+
+// logProperty("name") will show ["Bob", "Smith"]. notice when you call the function, you pass "name", not [name]. when the 
+// function receives "name", then it takes that property of "name" and uses it as personBracket["name"] which is required when
+// you are trying to get a value of a property when those properties are held in a variable.
+
+// logProperty("age") will show 32. the function receives "age" and it uses it as personBracket["age"]
+
+/* 
+
+SETTING OBJECT MEMBERS
+
+So far, the above notes only covered retrieving (or getting) object members. You can also set (update) the value of the object
+members by declaring the member you want to set (using dot or bracket notation).
+
+person.age = 45
+person["name"]["last"]= "Cratchit"
+
+*/
+
+const person = { // new object
+    name: { // the first property is a name object inside the person object
+        first: "Bob",
+        last: "Smith",
+    },
+    age: 32, // second property
+    bio() { // third property is a function. it shows name 0, name 1 and age
+        // remember if you want to use var's in a string with console.log you need `${ } ... `
+        // can rewrite bio: function () {... } to just bio() {console.log ... }
+        console.log(`${this.name.first} ${this.name.last} is ${this.age} years old.`);
+    },
+    introduceSelf() { // fourth property is a function. shows name 0
+        // can rewrite introduceSelf: function() {... } to just introduceSelf() {console.log ... }
+        console.log(`Hi, I"m ${this.name.first}.`);
+    },
+};
+
+person.age = 45; // age was 32. is now 45.
+person["name"]["last"] = "Cratchit"; // last name was Smith. is now Cratchet.
+
+// setting members isn't just for updating values of existing properties and methods. you can also create completely new
+// members
+
+person["eyes"] = "hazel";  // new member aka property/key with a value of hazel. this is using bracket notation
+person.farewell = function() { // new member aka property/key with a value of a function. this is using dot notation.
+    console.log("Bye everybody!");
+};
+
+// bracket notation can be used to set not only member values dynamically, but member names too. a good use is having users
+// store custom value types. in other words they can add a new member name along with that new member's value. the ex below
+// is when you ask a user to create a new member named height and the user gives it a value of 1.75. bc they are being stored 
+// in vars, you use [ ] to add it to your object.
+
+const myDataName = "height"; // this is a new member name stored in a var
+const myDataValue = "1.75 m"; // this is that new member's value stored in a var
+person[myDataName] = myDataValue; // using bracket notation, you're adding the new member name which is referenced using the var
+// myDataName and giving it a value which is also referenced using a var myDataValue. bc var's are used, you have to use bracket
+// notation when creating this new member.
+
+// adding a property using person.height (dot notation) has limitations bc it can only accept a literal member name, not a variable 
+// value pointing to a name.
+
+// after you created [myDataName]; in the console, you can see it using person.height. person["height"] also works. maybe when 
+// in doubt, use [ ], seems it will always work bc dot notation has limits when you're trying to access things stored in a var.
+
+/*  
+when you type person; in the console to see the person object, you will get the below. it shows all the members and values.
+the object has additional members than what you started with from line 19 at the beginning of this lesson. notice there is no
+[ ] for the members. [ ] are for getting and setting members and their values when they are stored in a var.
+
+age:45
+bio:ƒ bio()
+eyes:"hazel"
+farewell:ƒ ()
+height:"1.75 m"
+introduceSelf:ƒ introduceSelf()
+name:{first: 'Bob', last: 'Cratchit'}
+[[Prototype]]:Object
+
+*/
+
+/* WHAT IS "THIS"
+introduceSelf() {
+    console.log(`Hi, I'm ${this.name.first}.`);
+};
+
+notice this.name.first. "this" is a keyword that refers to the current object the code is being written inside. in this case, 
+"this" is equivalent to person. writing it like this.name.first is the same as person.name.first. "this" is very useful
+when you want to use the same method definition for every object you create.  
+
+*/
+const person1 = {
+    name: "Chris",
+    introduceSelf() {
+        console.log(`Hello, I'm ${this.name}.`);
+    },
+};
+
+const person2 = {
+    name: "Deepti",
+    introduceSelf() {
+        console.log(`Hello, I'm ${this.name}.`);
+    },
+};
+
+/* 
+notice the introduceSelf() code is exactly the same for both objects. yet it outputs a different name for each introduceSelf(). 
+although "this" isn't very useful when you have just one or two objects, it becomes very useful when you start using constructors
+to create multiple objects from a single object definition. 
+
+*/
+
+/*  
+INTRODUCING CONSTRUCTORS
+
+using object literals which is the way we've been creating objects so far is useful for one or two objects. when you want to
+change some properties of the object - like add a height property - then we have to update every object. we need to define the 
+"shape" of an object - the set of methods and properties it can have - and then create as many objects as we like, just updating 
+the values for the properties that are different.
+
+*/
+
+function createPerson(name) { // creates a function. it will receive a parameter called name. remember what you send it can be named
+    // anything. you don't need to call it name. for ex, you can call this function like this: createPerson("John") or 
+    // createPerson(someName). the function receives what is in the ( ) and uses that value for it's own internal work
+    const obj = {}; // creates an object which has nothing in it
+    obj.name = name; // adds a property called name and the value is what is received by the createPerson(received from elsewhere)
+    obj.introduceSelf = function () { // adds a property called introduceSelf and the value is a function. this is actually a 
+        // method
+        console.log(`Hi, I'm ${this.name}.`); // the function prints out a message to the console.
+    };
+
+    return obj; // after all the above steps are done in the function, then it returns the newly created object.
+};
+
+// the above function creates and returns a new object. the object will have two members
+// a property called name. and a method called introduceSelf() 
+// createPerson() takes a parameter name to set the value of the name property, but the value of the introduceSelf() method will
+// be the same for all objects created using this function. This is a very common pattern for creating objects.
+
+const salva = createPerson("Salva"); // uses the function from above line 235 to create an object named salva with the name 
+// property and the introduceSelf() method. you won't see anything in the console even though there is a console.log 
+// in the object's method. it won't show until you type salva.introduceSelf. if you type salva; in the console, it will show 
+// the object's properties and methods that you just created using the function.
+// salva.name; // the name is already in the object. you can comment this out and the introduceSelf will still work
+salva.introduceSelf(); // the method is already in the object. but it won't show until you type this out.
+
+const frankie = createPerson("Frankie"); // similar comments as above lines 253 to 258
+// frankie.name;
+frankie.introduceSelf();
+
+/* 
+const frankie = createPerson("Frankie"); 
+frankie.name; 
+frankie.introduceSelf();
+
+these 3 lines create an empty object, initializes it and returns it. using constructors are a better way of doing this.
+a constructor is a function called using the "new" keyword. 
+
+when you call a constructor: 
+
+it will create a new object.
+bind "this" to the new object, so you can refer to "this" in your constructor code
+run the code in the constructor
+return the new object
+
+
+
+*/
+
+
+
+
+
+</script>
+</html>

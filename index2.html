@@ -321,7 +321,7 @@ frankie1.introduceSelf();
 
 
 // TEST YOUR SKILLS
-// OBJECT 1
+// OBJECT BASICS 1
 const cat = {
   name : 'Bertie',
   breed : 'Cymric',
@@ -349,7 +349,7 @@ para2.textContent = `The cat's color is ${ cat.color }.`;
 section.appendChild(para1);
 section.appendChild(para2);
 
-// OBJECT 2
+// OBJECT BASICS 2
 
 let bandInfo;
 
@@ -392,6 +392,60 @@ bandInfo = band.bio();
 let bandPara1 = document.createElement('p');
 bandPara1.textContent = bandInfo;
 section.appendChild(bandPara1);
+
+// OBJECT BASICS 3
+
+const catNew = { // almost same as OBJECT BASICS 1 except changed the const name also edited the console.log
+  name : 'Bertie',
+  breed : 'Cymric',
+  color : 'white',
+  greeting: function() {
+    console.log(`Hello, said ${this.name} the ${this.breed}.`);
+  }
+}
+
+// Put your code here
+
+// almost same as OBJECT BASICS 1 except changed the const name
+const catNewName = catNew["name"]; // store the value of the name property in var catName using bracket notation
+catNew.greeting(); // run the greeting using dot notation
+catNew.color = "black"; // change the color to black
+
+// new code for the constructors. the constructor will make the structure for your new cat object. it will have 4 members. 
+// the name, breed, color and greeting(). then create new const's using new values and the constructor will create new 
+// objects with the new name, breed, color and greeting.
+
+function Cat (name, breed, color) { // capital C for the constructor, whereas non-constructor functions are lower case
+    this.name = name;
+    this.breed = breed;
+    this.color = color;
+    this.greeting = function () {
+        console.log(`Hello, said ${this.name} the ${this.breed}.`);
+    };
+};
+
+const cat2 = new Cat("Softy", "Tabby", "Orange"); // the "new" must be used when calling a constructor. sending it the 3 values
+// that will be used for the members. greeting doesn't take any new values other than the existing 3. that's why there are only 
+// 3 parameters/values.
+cat2.greeting();
+
+const cat3 = new Cat("Fluffy", "Aegean", "Calico");
+cat3.greeting();
+
+const cat4 = new Cat("Silly", "American Shorthair", "Brown and White");
+cat4.greeting();
+
+// Don't edit the code below here
+
+let para3 = document.createElement('p');
+let para4 = document.createElement('p'); 
+let section2 = document.querySelector('section');  // had to add this or else the p's won't show
+
+para3.textContent = `The cat's name is ${ catNewName }.`;
+para4.textContent = `The cat's color is ${ catNew.color }.`;
+
+section2.appendChild(para3);
+section2.appendChild(para4);
 
 </script>
 </html>

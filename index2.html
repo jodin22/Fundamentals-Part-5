@@ -356,18 +356,36 @@ let bandInfo;
 // Put your code here
 
 const band = {
-    name: "ABBA",
-    nationality: "Sweden",
-    genre: ["Pop", "Disco"],
-    members: 4,
-    formed: 1972,
-    split: "false",
-    albums: ["name", "year"], // each array item is an object containing 2 members - name and year released
-    // https://www.javascripttutorial.net/object/convert-an-object-to-an-array-in-javascript/
-    // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+    name: "ABBA", 
+    nationality: "Sweden", 
+    genre: ["Pop", "Disco"], // array that you've seen before
+    members: 4,  
+    formed: 1972, 
+    split: "false", 
+    albums: [{name: "Ring Ring", year: 1973}, {name: "ABBA Gold", year: 1992}], // this array is a little different than
+    // what you learned before. notice each item is an object. {name: , year: }. each object has two members - name and year.
+    // to reference the array item, you can use both dot notation and bracket notation. notice below in bio(), the reference 
+    // to the album name and year is ${this.albums[0].name} or ${this.albums[0]["name"]}. the breakdown is "this" for the 
+    // current object. albums is the member. the values of the array are: [0] is the index. name is the member of the object
+    // inside the array.
+
+    // https://stackoverflow.com/questions/37077617/javascript-store-multiple-objects-in-array-and-access-their-properties-via
+    // use the answer from hmharsh3, may 17 2017
+
+    bio() {
+    let something = `${this.name} is a ${this.members} member group from ${this.nationality}. They formed in ${this.formed} and
+    are known for ${this.genre[0]} and ${this.genre[1]} music. ${this.albums[0].name} or ${this.albums[0]["name"]} was their first album, released in
+    ${this.albums[0].year}. ${this.albums[1].name} is a compilation released in ${this.albums[1].year}. It introduced their
+    music to newer generations and their popularity has been growing ever since.`;
+    return something; 
+    // before you had console.log(your bio info) without a return. this worked bc console.log is returning something from the 
+    // function. when you removed console.log and just put your bio in the var something, nothing happened bc you have to 
+    // return something with a function.
+},
 
 };
 
+bandInfo = band.bio();
 
 // Don't edit the code below here
 

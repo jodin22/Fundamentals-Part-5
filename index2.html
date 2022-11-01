@@ -150,7 +150,7 @@ const person = { // new object
 };
 
 person.age = 45; // age was 32. is now 45.
-person["name"]["last"] = "Cratchit"; // last name was Smith. is now Cratchet.
+person["name"]["last"] = "Cratchit"; // last name was Smith. is now Cratchit.
 
 // setting members isn't just for updating values of existing properties and methods. you can also create completely new
 // members
@@ -179,7 +179,7 @@ person[myDataName] = myDataValue; // using bracket notation, you're adding the n
 
 /*  
 when you type person; in the console to see the person object, you will get the below. it shows all the members and values.
-the object has additional members than what you started with from line 19 at the beginning of this lesson. notice there is no
+the object has more members than what you started with from line 19 at the beginning of this lesson. notice there is no
 [ ] for the members. [ ] are for getting and setting members and their values when they are stored in a var.
 
 age:45
@@ -439,13 +439,14 @@ cat4.greeting();
 
 let para3 = document.createElement('p');
 let para4 = document.createElement('p'); 
-let section2 = document.querySelector('section');  // had to add this or else the p's won't show
+// let section2 = document.querySelector('section');  // had to add this or else the p's won't show
 
 para3.textContent = `The cat's name is ${ catNewName }.`;
 para4.textContent = `The cat's color is ${ catNew.color }.`;
 
-section2.appendChild(para3);
-section2.appendChild(para4);
+section.appendChild(para3); // had this as section2... but you don't need to do it this way, just re-use the let section = 
+// from line 344
+section.appendChild(para4); 
 
 // OBJECT BASICS 4 
 
